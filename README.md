@@ -14,6 +14,7 @@ diseño.
 
 Link del backend en la nube: https://djuliabackend.up.railway.app/api
 Para usarlo , cambie la variable (baseUrl) en el postman o el API_URL en el front.
+Link del frontend en la nube: https://djuliafrontend.up.railway.app
 
 ------------------------------------------------------------------------
 
