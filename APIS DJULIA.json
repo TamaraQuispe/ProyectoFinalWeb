@@ -1,0 +1,1567 @@
+{
+  "info": {
+    "name": "Pastelería D'Julia API",
+    "description": "Colección completa de endpoints para el sistema de gestión de pastelería",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Autenticación",
+      "item": [
+        {
+          "name": "Login Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"correo\": \"cliente@gmail.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/cliente/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "cliente",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login Vendedor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"correo\": \"vendedor@pasteleria.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/vendedor/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "vendedor",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"correo\": \"admin@pasteleria.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/admin/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "admin",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registro Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Nuevo\",\n  \"apellido\": \"Cliente\",\n  \"correo\": \"nuevo@gmail.com\",\n  \"password\": \"123456\",\n  \"celular\": \"999888777\",\n  \"direccion\": \"Av. Nueva 123\",\n  \"dni\": \"99887766\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/cliente/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "cliente",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registro Admin (requiere token Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Nuevo\",\n  \"apellido\": \"Admin\",\n  \"correo\": \"nuevoadmin@pasteleria.com\",\n  \"password\": \"123456\",\n  \"celular\": \"999888777\",\n  \"direccion\": \"Av. Admin 456\",\n  \"dni\": \"11223344\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/admin/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "admin",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registro Vendedor (requiere token Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Nuevo\",\n  \"apellido\": \"Vendedor\",\n  \"correo\": \"nuevovendedor@pasteleria.com\",\n  \"password\": \"123456\",\n  \"celular\": \"999888777\",\n  \"direccion\": \"Av. Vendedor 789\",\n  \"dni\": \"55667788\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/vendedor/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "vendedor",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Perfil",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Perfil",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Nombre Actualizado\",\n  \"apellido\": \"Apellido Actualizado\",\n  \"celular\": \"987654321\",\n  \"direccion\": \"Nueva Dirección 123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "profile"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Productos y Categorías (Público)",
+      "item": [
+        {
+          "name": "Listar Categorías",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Gestión Categorías (Admin)",
+      "item": [
+        {
+          "name": "Crear Categoría",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Bebidas\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "categorias"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Categoría",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Bebidas Calientes\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/categorias/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "categorias",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Categoría",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/categorias/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "categorias",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Gestión Productos (Admin)",
+      "item": [
+        {
+          "name": "Crear Producto (con imagen)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "nombre",
+                  "value": "Pan de Chocolate",
+                  "type": "text"
+                },
+                {
+                  "key": "descripcion",
+                  "value": "Delicioso pan con chocolate",
+                  "type": "text"
+                },
+                {
+                  "key": "precio",
+                  "value": "2.50",
+                  "type": "text"
+                },
+                {
+                  "key": "stock",
+                  "value": "50",
+                  "type": "text"
+                },
+                {
+                  "key": "categoriaId",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "imagen",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "productos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "nombre",
+                  "value": "Pan Francés Actualizado",
+                  "type": "text"
+                },
+                {
+                  "key": "descripcion",
+                  "value": "Pan francés recién horneado",
+                  "type": "text"
+                },
+                {
+                  "key": "precio",
+                  "value": "0.60",
+                  "type": "text"
+                },
+                {
+                  "key": "stock",
+                  "value": "120",
+                  "type": "text"
+                },
+                {
+                  "key": "categoriaId",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/productos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "productos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Producto",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/productos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "productos",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Pedidos Cliente",
+      "item": [
+        {
+          "name": "Crear Pedido (con comprobante Yape)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "pedido",
+                  "value": "{\"detalles\": [{\"productoId\": 1, \"cantidad\": 5}, {\"productoId\": 3, \"cantidad\": 2}], \"tipoEntrega\": \"RECOJO_TIENDA\", \"numeroYape\": \"987654321\"}",
+                  "type": "text",
+                  "contentType": "application/json"
+                },
+                {
+                  "key": "comprobanteYape",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cliente/pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente",
+                "pedidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear Pedido Delivery",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "pedido",
+                  "value": "{\"detalles\": [{\"productoId\": 14, \"cantidad\": 1}, {\"productoId\": 7, \"cantidad\": 2}], \"tipoEntrega\": \"DELIVERY\", \"direccionEntrega\": \"Av. Principal 123, Lima\", \"telefonoContacto\": \"987654321\", \"referencia\": \"Casa blanca con portón negro\", \"observaciones\": \"Tocar el timbre\", \"numeroYape\": \"987654321\"}",
+                  "type": "text",
+                  "contentType": "application/json"
+                },
+                {
+                  "key": "comprobanteYape",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cliente/pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente",
+                "pedidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mis Pedidos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente/pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente",
+                "pedidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Mi Pedido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente/pedidos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente",
+                "pedidos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Historial de Mi Pedido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente/pedidos/1/historial",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente",
+                "pedidos",
+                "1",
+                "historial"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancelar Mi Pedido",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente/pedidos/1/cancelar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente",
+                "pedidos",
+                "1",
+                "cancelar"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Pedidos Vendedor",
+      "item": [
+        {
+          "name": "Listar Todos los Pedidos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Pedidos por Estado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/estado/POR_CONFIRMAR",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "estado",
+                "POR_CONFIRMAR"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Pedido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verificar Pago Yape",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/8/verificar-pago",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "8",
+                "verificar-pago"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Rechazar Pago Yape",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"motivo\": \"Comprobante ilegible o monto incorrecto\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/8/rechazar-pago",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "8",
+                "rechazar-pago"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cambiar Estado a CONFIRMADO",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"CONFIRMADO\",\n  \"observacion\": \"Pedido confirmado, pago verificado\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/1/estado",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "1",
+                "estado"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cambiar Estado a EN_PREPARACION",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"EN_PREPARACION\",\n  \"observacion\": \"Preparando productos\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/1/estado",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "1",
+                "estado"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cambiar Estado a LISTO_PARA_RECOGER",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"LISTO_PARA_RECOGER\",\n  \"observacion\": \"Pedido listo para recoger\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/1/estado",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "1",
+                "estado"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cambiar Estado a EN_CAMINO",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"EN_CAMINO\",\n  \"observacion\": \"Pedido en camino\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/2/estado",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "2",
+                "estado"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cambiar Estado a ENTREGADO",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"ENTREGADO\",\n  \"observacion\": \"Pedido entregado exitosamente\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/1/estado",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "1",
+                "estado"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Historial del Pedido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/vendedor/pedidos/1/historial",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedor",
+                "pedidos",
+                "1",
+                "historial"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Pedidos Admin",
+      "item": [
+        {
+          "name": "Listar Todos los Pedidos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Pedido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Historial",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos/1/historial",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos",
+                "1",
+                "historial"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar por Estado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos/estado/ENTREGADO",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos",
+                "estado",
+                "ENTREGADO"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verificar Pago",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos/1/verificar-pago",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos",
+                "1",
+                "verificar-pago"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Rechazar Pago",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"motivo\": \"Monto incorrecto\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos/1/rechazar-pago",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos",
+                "1",
+                "rechazar-pago"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cambiar Estado",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"CONFIRMADO\",\n  \"observacion\": \"Confirmado por admin\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/pedidos/1/estado",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "pedidos",
+                "1",
+                "estado"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Boletas",
+      "item": [
+        {
+          "name": "Cliente - Verificar Disponibilidad",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/boletas/pedido/1/disponibilidad",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boletas",
+                "pedido",
+                "1",
+                "disponibilidad"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cliente - Ver Boleta (PDF inline)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/boletas/pedido/1/ver",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boletas",
+                "pedido",
+                "1",
+                "ver"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cliente - Descargar Boleta (PDF)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/boletas/pedido/1/descargar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boletas",
+                "pedido",
+                "1",
+                "descargar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Admin - Ver Boleta",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/boletas/admin/pedido/1/ver",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boletas",
+                "admin",
+                "pedido",
+                "1",
+                "ver"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Admin - Descargar Boleta",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/boletas/admin/pedido/1/descargar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boletas",
+                "admin",
+                "pedido",
+                "1",
+                "descargar"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. Gestión Usuarios (Admin)",
+      "item": [
+        {
+          "name": "Listar Usuarios",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "usuarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/usuarios/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "usuarios",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Nombre Actualizado\",\n  \"apellido\": \"Apellido Actualizado\",\n  \"celular\": \"999888777\",\n  \"direccion\": \"Nueva Dirección\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/usuarios/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "usuarios",
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/usuarios/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "usuarios",
+                "2"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Archivos",
+      "item": [
+        {
+          "name": "Obtener Imagen de Producto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/archivos/panes/pan_frances.jpg",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "archivos",
+                "panes",
+                "pan_frances.jpg"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "11. Dashboard (Admin)",
+      "item": [
+        {
+          "name": "Estadísticas Generales",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard/estadisticas-generales",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard",
+                "estadisticas-generales"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Productos Más Vendidos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard/productos-mas-vendidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard",
+                "productos-mas-vendidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ventas por Categoría",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard/ventas-por-categoria",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard",
+                "ventas-por-categoria"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Estado de Pedidos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard/estado-pedidos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard",
+                "estado-pedidos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Pedidos Recientes (limit por defecto = 4)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard/pedidos-recientes?limit=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard",
+                "pedidos-recientes"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "4",
+                  "description": "Cantidad de pedidos a mostrar (por defecto 4)"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
